@@ -173,7 +173,7 @@ def main():
     torch.cuda.empty_cache()
 
     if not args.audio.endswith('.wav'):
-        command = 'ffmpeg -loglevel error -y -i {} -strict -2 {}'.format(args.audio, 'temp/{}/temp.wav'.format(args.tmp_dir))
+        command = 'sudo ffmpeg -loglevel error -y -i {} -strict -2 {}'.format(args.audio, 'temp/{}/temp.wav'.format(args.tmp_dir))
         subprocess.call(command, shell=True)
         args.audio = 'temp/{}/temp.wav'.format(args.tmp_dir)
     wav = audio.load_wav(args.audio, 16000)
@@ -270,7 +270,7 @@ def main():
     
     if not os.path.isdir(os.path.dirname(args.outfile)):
         os.makedirs(os.path.dirname(args.outfile), exist_ok=True)
-    command = 'ffmpeg -loglevel error -y -i {} -i {} -strict -2 -q:v 1 {}'.format(args.audio, 'temp/{}/result.mp4'.format(args.tmp_dir), args.outfile)
+    command = 'sudo ffmpeg -loglevel error -y -i {} -i {} -strict -2 -q:v 1 {}'.format(args.audio, 'temp/{}/result.mp4'.format(args.tmp_dir), args.outfile)
     subprocess.call(command, shell=platform.system() != 'Windows')
     print('outfile:', args.outfile)
 
